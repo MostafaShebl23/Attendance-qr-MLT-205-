@@ -16,7 +16,7 @@
 
     function updateLink() {
       const token = generateToken();
-      const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSfYY9MlmILD0PGwFkBhLGi9Q3Q7ZXLkVh5Ebnk9gJ0WjQ_3Og/viewform?usp=header";
+      const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSeLhJv6-f9lJ5vW_BrAfd-CDUEQAGDlV65yBND4d63ZkUpMwg/viewform?usp=header";
       const url = formBase + "?usp=header&token=" + token;
 
       // تحديث اللينك الظاهر
@@ -31,8 +31,8 @@
     // أول تشغيل
     window.onload = () => {
       updateLink();
-      // تحديث الكود كل 30 ثانية
-      setInterval(updateLink, 30000);
+      // تحديث الكود كل 10 ثانية
+      setInterval(updateLink, 10000);
     };
   </script>
 </head>
@@ -43,7 +43,8 @@
   <a id="formLink" target="_blank">Go to Form</a>
   <br><br>
   <img id="qr" src="" alt="QR Code">
-  <p style="color:red;">⚠️ Token changes every 30 seconds. You must enter the correct token in the form.</p>
+  <p style="color:red;">⚠️ Token changes every 10 seconds. You must enter the correct token in the form.</p>
 </body>
 </html>
+
 
