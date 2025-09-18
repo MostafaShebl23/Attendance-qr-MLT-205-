@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secure Attendance QR</title>
+  <script>
+    // دالة لتوليد رمز عشوائي
+    function generateToken(length = 6) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let token = "";
+      for (let i = 0; i < length; i++) {
+        token += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return token;
+    }
+
+    function updateLink() {
+      const token = generateToken();
+      const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSfYY9MlmILD0PGwFkBhLGi9Q3Q7ZXLkVh5Ebnk9gJ0WjQ_3Og/viewform?usp=header";
+      const url = formBase + "?usp=header&token=" + token;
+
+      // تحديث اللينك الظاهر
+      document.getElementById("token").innerText = token;
+      document.getElementById("formLink").href = url;
+
+      // تحديث QR code
+      document.getElementById("qr").src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(url);
+    }
+
+    // أول تشغيل
+    window.onload = () => {
+      updateLink();
+      // تحديث الكود كل 30 ثانية
+      setInterval(updateLink, 30000);
+    };
+  </script>
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 50px;">
+  <h2>Attendance QR Code</h2>
+  <p>Use this QR code to access the attendance form.</p>
+  <p><strong>Current Session Token:</strong> <span id="token"></span></p>
+  <a id="formLink" target="_blank">Go to Form</a>
+  <br><br>
+  <img id="qr" src="" alt="QR Code">
+  <p style="color:red;">⚠️ Token changes every 30 seconds. You must enter the correct token in the form.</p>
+</body>
+</html>
